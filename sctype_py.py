@@ -194,7 +194,7 @@ def sctype_score(scRNAseqData, scaled=True, gs=None, gs2=None, gene_names_to_upp
 def process_cluster(cluster,adata,es_max,clustering):
     cluster_data = es_max.loc[:, adata.obs.index[adata.obs[clustering] == cluster]]
     es_max_cl = cluster_data.sum(axis=1).sort_values(ascending=False)
-    top_scores = es_max_cl.head(10)
+    top_scores = es_max_cl.head(len(es_max_cl)) #it was set to 10 earlier
     ncells = sum(adata.obs[clustering] == cluster)
     return pd.DataFrame({
         'cluster': cluster,
